@@ -6,13 +6,14 @@ export default function TaskForm({ addTask }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-            
-        if (newTask === "") {
-            console.log("empty task")
-        } else {
-            addTask(newTask)
-        }
-            setNewTask('')
+
+        // if (newTask === "") {
+        //     console.log("empty task")
+        // } else {
+        //     addTask(newTask)
+        // }
+        addTask(newTask)
+        setNewTask('')
     }
 
     return (

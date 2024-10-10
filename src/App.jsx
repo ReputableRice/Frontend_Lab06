@@ -1,21 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import Tasks from './components/Tasks/Task'
-import TaskForm from './components/TaskForm/TaskForm'
+import { useState } from 'react';
+import './App.css';
+import Tasks from './components/Tasks/Task';
+import TaskForm from './components/TaskForm/TaskForm';
 
 function App() {
   const [taskList, setTaskList] = useState([
-    {
-      task: 'Task 1',
-      completed: false
-    }, {
-      task: 'Task 2',
-      completed: false,
-    }, {
-      task: 'Task 3',
-      completed: false,
-    }
-  ])
+    { task: 'Task 1', isComplete: false },
+    { task: 'Task 2', isComplete: false },
+    { task: 'Task 3', isComplete: false }
+  ]);
 
   const tasksLeft = taskList.filter(task => !task.isComplete).length;
 
@@ -41,7 +34,7 @@ function App() {
   }
 
   function handleDeletion(taskIndex) {
-    setTaskList(taskList.filter((index) => index !== taskIndex));
+    setTaskList(taskList.filter((_, index) => index !== taskIndex));
   }
 
   return (
@@ -53,7 +46,7 @@ function App() {
         {taskDescription}
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
