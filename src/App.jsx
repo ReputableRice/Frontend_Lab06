@@ -47,6 +47,7 @@ function App() {
   return (
     <>
       <div className='app'>
+        <h1>Daily Planner</h1>
         <TaskForm addTask={addTask} />
         <h2>You have {tasksLeft} tasks remaining</h2>
         {taskDescription}
