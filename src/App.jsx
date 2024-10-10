@@ -41,7 +41,7 @@ function App() {
   }
 
   function handleDeletion(taskIndex) {
-    setTaskList(taskList.filter((_, index) => index !== taskIndex));
+    setTaskList(taskList.filter((index) => index !== taskIndex));
   }
 
   return (
