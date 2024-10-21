@@ -10,6 +10,9 @@ function App() {
     { task: 'Task 3', isComplete: false }
   ]);
 
+  const [category, setCategory] = useState(null)
+  const [filteredList, setFilteredList] = useState()
+
   const tasksLeft = taskList.filter(task => !task.isComplete).length;
 
   const taskDescription = taskList.map((task, index) => (
@@ -37,13 +40,31 @@ function App() {
     setTaskList(taskList.filter((_, index) => index !== taskIndex));
   }
 
+  if (category === "default") {
+    console.log("default")
+
+  } else if (category === "completed") {
+    console.log("completed tasks")
+
+  } else if (category === "pending") {
+    console.log("pending tasks")
+  }
+
+
   return (
     <>
       <div className='app'>
         <h1>Daily Planner</h1>
         <TaskForm addTask={addTask} />
+        <div style={{ marginTop: '1rem' }}>
+          <button onClick={() => { setCategory("default") }}>All</button>
+          <button onClick={() => { setCategory("completed") }}>Completed</button>
+          <button onClick={() => { setCategory("pending") }}>Pending</button>
+        </div>
+
         <h2>You have {tasksLeft} tasks remaining</h2>
         {taskDescription}
+        {category}
       </div>
     </>
   );
