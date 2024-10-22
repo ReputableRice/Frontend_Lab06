@@ -10,9 +10,12 @@ function App() {
     { task: 'Task 3', isComplete: false }
   ]);
 
+  const [category, setCategory] = useState("default")
+
   const tasksLeft = taskList.filter(task => !task.isComplete).length;
 
-  const taskDescription = taskList.map((task, index) => (
+  //task renderer
+  const renderTasks = (tasks) => tasks.map((task, index) => (
     <Tasks
       key={index}
       index={index}
@@ -22,6 +25,11 @@ function App() {
       handleDeletion={handleDeletion}
     />
   ));
+
+  //inserting filtering conditions to existing render
+  const completedList = taskList.filter(task => task.isComplete);
+  const incompletedList = taskList.filter(task => !task.isComplete);
+
 
   function addTask(newTask) {
     setTaskList([...taskList, { task: newTask, isComplete: false }]);
@@ -37,13 +45,26 @@ function App() {
     setTaskList(taskList.filter((_, index) => index !== taskIndex));
   }
 
+  // const filteredProducts = filter === 0 ? products
+  // : products.filter(product => product.category === filter)
+
+
   return (
     <>
       <div className='app'>
         <h1>Daily Planner</h1>
         <TaskForm addTask={addTask} />
+        <div style={{ marginTop: '1rem' }}>
+          <button onClick={() => { setCategory("default") }}>All</button>
+          <button onClick={() => { setCategory("completed") }}>Completed</button>
+          <button onClick={() => { setCategory("pending") }}>Pending</button>
+        </div>
+
         <h2>You have {tasksLeft} tasks remaining</h2>
-        {taskDescription}
+        { category === "default" && renderTasks(taskList)}
+        { category === "completed" && renderTasks(completedList)}
+        { category === "pending" && renderTasks(incompletedList)}
+
       </div>
     </>
   );
